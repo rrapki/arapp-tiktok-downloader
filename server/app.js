@@ -4,7 +4,7 @@ const axios = require("axios");
 const { tiktokdl } = require("tiktokdl");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 
 // Middleware
