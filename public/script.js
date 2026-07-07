@@ -25,23 +25,19 @@ button.addEventListener("click", async () => {
     try {
 
 
-        const res = await fetch("/download", {
+        const res = await fetch("/api/download", {
 
-            method: "POST",
+    method: "POST",
 
-            headers: {
+    headers: {
+        "Content-Type": "application/json"
+    },
 
-                "Content-Type": "application/json"
+    body: JSON.stringify({
+        url:url
+    })
 
-            },
-
-            body: JSON.stringify({
-
-                url:url
-
-            })
-
-        });
+});
 
 
 
