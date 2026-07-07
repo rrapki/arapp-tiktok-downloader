@@ -16,33 +16,29 @@ button.addEventListener("click", async () => {
     }
 
 
-
     button.innerText = "Loading...";
     button.disabled = true;
 
 
-
     try {
-
 
         const res = await fetch("/api/download", {
 
-    method: "POST",
+            method: "POST",
 
-    headers: {
-        "Content-Type": "application/json"
-    },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-    body: JSON.stringify({
-        url:url
-    })
+            body: JSON.stringify({
+                url: url
+            })
 
-});
+        });
 
 
 
         const result = await res.json();
-
 
 
         if (!result.success) {
@@ -55,20 +51,15 @@ button.addEventListener("click", async () => {
 
 
 
-
         const old = document.querySelector(".hasil");
 
-        if(old){
-
+        if (old) {
             old.remove();
-
         }
 
 
 
-
         const data = result.data;
-
 
 
         console.log("DATA TIKTOK:");
@@ -76,8 +67,6 @@ button.addEventListener("click", async () => {
 
 
 
-
-        // Ambil URL video
         const videoUrl =
             data.video ||
             data.play ||
@@ -86,8 +75,6 @@ button.addEventListener("click", async () => {
 
 
 
-
-        // Ambil URL watermark
         const wmUrl =
             data.wm ||
             data.watermark ||
@@ -95,8 +82,6 @@ button.addEventListener("click", async () => {
 
 
 
-
-        // Ambil URL audio
         const musicUrl =
             data.music ||
             data.audio ||
@@ -111,13 +96,9 @@ button.addEventListener("click", async () => {
 
 
 
-
-
-
         const div = document.createElement("div");
 
         div.className = "hasil";
-
 
 
         div.innerHTML = `
@@ -133,32 +114,21 @@ button.addEventListener("click", async () => {
             </div>
 
 
-
             <div class="download-buttons">
 
-
                 <button id="btnVideo" class="btn video">
-
                     📹 Video
-
                 </button>
-
 
 
                 <button id="btnWM" class="btn watermark">
-
                     💧 Watermark
-
                 </button>
-
 
 
                 <button id="btnMP3" class="btn music">
-
                     🎵 MP3
-
                 </button>
-
 
             </div>
 
@@ -174,16 +144,11 @@ button.addEventListener("click", async () => {
 
 
 
-
-
-
         // Download Video
-        document
-        .getElementById("btnVideo")
-        .onclick = () => {
+        document.getElementById("btnVideo").onclick = () => {
 
 
-            if(!videoUrl){
+            if (!videoUrl) {
 
                 alert("Video tidak ditemukan");
 
@@ -192,13 +157,9 @@ button.addEventListener("click", async () => {
             }
 
 
-
             window.location.href =
-
-            "/download-file?type=video&url=" +
-
-            encodeURIComponent(videoUrl);
-
+                "/api/download-file?type=video&url=" +
+                encodeURIComponent(videoUrl);
 
 
         };
@@ -207,16 +168,11 @@ button.addEventListener("click", async () => {
 
 
 
-
-
         // Download Watermark
-        document
-        .getElementById("btnWM")
-        .onclick = () => {
+        document.getElementById("btnWM").onclick = () => {
 
 
-
-            if(!wmUrl){
+            if (!wmUrl) {
 
                 alert("Watermark tidak ditemukan");
 
@@ -225,67 +181,40 @@ button.addEventListener("click", async () => {
             }
 
 
-
-
             window.location.href =
-
-            "/download-file?type=wm&url=" +
-
-            encodeURIComponent(wmUrl);
-
+                "/api/download-file?type=wm&url=" +
+                encodeURIComponent(wmUrl);
 
 
         };
-
-
-
-
 
 
 
 
 
         // Download MP3
-        document
-        .getElementById("btnMP3")
-        .onclick = () => {
+        document.getElementById("btnMP3").onclick = () => {
 
 
+            if (!musicUrl) {
 
-            if(!musicUrl){
-
-
-                alert(
-                    "Link MP3 tidak tersedia"
-                );
-
+                alert("Link MP3 tidak tersedia");
 
                 return;
-
 
             }
 
 
-
-
-
             window.location.href =
-
-            "/download-file?type=music&url=" +
-
-            encodeURIComponent(musicUrl);
-
+                "/api/download-file?type=music&url=" +
+                encodeURIComponent(musicUrl);
 
 
         };
 
 
 
-
-
-
-
-    } catch(err) {
+    } catch (err) {
 
 
         console.error(err);
