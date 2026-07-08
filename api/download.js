@@ -22,9 +22,9 @@ module.exports = async function (req, res) {
 
         const result = await tiktokdl(url);
 
-        console.log("========== HASIL TIKTOKDL ==========");
-        console.log(JSON.stringify(result, null, 2));
-        console.log("====================================");
+console.log("=== RESULT ===");
+console.log(JSON.stringify(result, null, 2));
+console.log("==============");
 
         res.json({
             success: true,
